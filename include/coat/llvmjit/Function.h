@@ -233,7 +233,7 @@ struct Function<runtimellvmjit,R(*)(Args...)>{
 			// check if it has a function pointer attached as metadata
 			if(llvm::MDNode *md = f.getMetadata("coat.fnptr")){
 				// avoid defining a symbol twice by looking first
-				bool found = jit.J->lookup(f.getName());
+				bool found = (bool)jit.J->lookup(f.getName());
 				if(!found){
 					//FIXME: get rid of llvm::cast
 					llvm::Constant *c = llvm::cast<llvm::ConstantAsMetadata>(md->getOperand(0))->getValue();
